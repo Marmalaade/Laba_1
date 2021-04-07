@@ -1,14 +1,10 @@
 package com.laba1.demo.cache;
 
-import com.laba1.demo.collision.ZCollisionField;
 import com.laba1.demo.controller.ZController;
 import com.laba1.demo.queryCfg.QueryCfg;
 import org.springframework.stereotype.Component;
-
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 
@@ -17,13 +13,12 @@ public class Cache {
     private static final Logger logger = Logger.getLogger(String.valueOf(ZController.class));
     Map<QueryCfg, Integer> answMap = new HashMap<>();
 
-
     public Integer getAnsw(QueryCfg queryCfg) {
         Integer answer = answMap.get(queryCfg);
         if (answer == null) {
             return answer;
         } else {
-            logger.info("Received result" + " " + answer);
+            logger.info("Received result from cache" + " " + answer);
             return answer;
         }
     }

@@ -1,9 +1,6 @@
 package com.laba1.demo.collision;
 
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
-
 public class ZCollisionField {
 
     private  int weight1;

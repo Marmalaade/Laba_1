@@ -5,25 +5,22 @@ import com.laba1.demo.collision.ZCollisionField;
 import com.laba1.demo.exceptions.DataValidationException;
 import com.laba1.demo.service.ZService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.NonNull;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import java.sql.SQLOutput;
 import java.util.logging.Logger;
 
 
 @RestController
+
 public class ZController {
     private static final String FAKE_UNCHECKED_EXCEPTION = "Fake unchecked exception";
     private static final Logger logger = Logger.getLogger(String.valueOf(ZController.class));
     private static final String WEIGHT_ERROR = "Weight must be greater than zero";
-@Autowired
+
+    @Autowired
     ZService zService;
 
     @GetMapping("/calculation")
@@ -48,7 +45,4 @@ public class ZController {
         }
         return ResponseEntity.ok(zCollisionField);
 
-    }
-
-
-}
+    }}

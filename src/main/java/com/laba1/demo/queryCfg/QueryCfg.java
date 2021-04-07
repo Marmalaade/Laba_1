@@ -1,11 +1,27 @@
 package com.laba1.demo.queryCfg;
 
+import java.util.Objects;
+
 public class QueryCfg {
 
     private int weight1;
     private int speed1;
     private int weight2;
     private int speed2;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        QueryCfg queryCfg = (QueryCfg) o;
+        return weight1 == queryCfg.weight1 && speed1 == queryCfg.speed1 && weight2 == queryCfg.weight2 && speed2 == queryCfg.speed2;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(weight1, speed1, weight2, speed2);
+    }
+
 
     public int getWeight1() {
         return weight1;
@@ -45,5 +61,6 @@ public class QueryCfg {
         this.weight2 = weight2;
         this.speed2 = speed2;
     }
+
 }
 

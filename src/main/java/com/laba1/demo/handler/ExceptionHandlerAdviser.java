@@ -1,8 +1,6 @@
-package com.laba1.demo.controller;
-
+package com.laba1.demo.handler;
 import com.laba1.demo.exceptions.DataValidationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
