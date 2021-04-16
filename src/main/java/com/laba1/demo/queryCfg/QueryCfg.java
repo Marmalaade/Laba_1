@@ -61,6 +61,5 @@ public class QueryCfg {
         this.weight2 = weight2;
         this.speed2 = speed2;
     }
-
 }
 

@@ -17,11 +17,15 @@ public class ZService {
     private Cache cache;
 
     public ZService() {
+
+    }
+
+    public Cache getCache() {
+        return cache;
     }
 
     public ZCollisionField onlyCalculateTesting(int weight1, int speed1, int weight2, int speed2) {
-        ZCollisionField zCollisionField = new ZCollisionField(weight1, speed1, weight2, speed2, Math.abs(weight1 * speed1) - Math.abs(weight2 * speed2));
-        return zCollisionField;
+        return new ZCollisionField(weight1, speed1, weight2, speed2, Math.abs(weight1 * speed1) - Math.abs(weight2 * speed2));
     }
 
     public ZCollisionField calculate(int weight1, int speed1, int weight2, int speed2) {

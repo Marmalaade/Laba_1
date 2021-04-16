@@ -1,15 +1,17 @@
 package com.laba1.demo.controller;
 
 
+import com.laba1.demo.bulkService.BulkService;
+import com.laba1.demo.cache.Cache;
 import com.laba1.demo.collision.ZCollisionField;
+import com.laba1.demo.entityes.AnswerEntity;
 import com.laba1.demo.exceptions.DataValidationException;
 import com.laba1.demo.service.ZService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 
@@ -22,11 +24,45 @@ public class ZController {
 
     @Autowired
     ZService zService;
+    @Autowired
+    BulkService bulkService;
+
+    @Autowired
+    AnswersRepository answersRepository;
+
+    @GetMapping("/getAnswers")
+    public List<AnswerEntity> getEmployee(){
+        return answersRepository.findAll();
+
+    }
+
+    @PostMapping("/putAnswers")
+    public void createEmployee() {
+        int id = 0;
+        Cache cache = zService.getCache();
+        for (QueryCfg cfg : cache.getQueries()) {
+            AnswerEntity entity = new AnswerEntity();
+            entity.setAnswerId(id++);
+            entity.setAsnwer_value(cache.getAnsw(cfg));
+            answersRepository.save(entity);
+        }
+        cache.clear();
+    }
+
+
+    @PostMapping("/postFirst")
+    public ResponseEntity bulkAnswer(@RequestBody List<QueryCfg> queryCfgList) {
+        return ResponseEntity.ok(bulkService.bulkCalculation(queryCfgList));
+    }
+
+    @PostMapping("/postSecond")
+    public ResponseEntity bulkAggregation(@RequestBody List<QueryCfg> queryCfgList) {
+        return ResponseEntity.ok(bulkService.bulkAggregation(queryCfgList));
+    }
 
     @GetMapping("/calculation")
 
     public ResponseEntity calculate(
-
             @RequestParam(name = "x1") int weight1,
             @RequestParam(name = "y1") int speed1,
             @RequestParam(name = "x2") int weight2,
@@ -45,4 +81,5 @@ public class ZController {
         }
         return ResponseEntity.ok(zCollisionField);
 
-    }}
+    }
+}
